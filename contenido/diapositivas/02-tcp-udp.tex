@@ -1,0 +1,45 @@
+% ---------------------------------------------------------------------
+% Parte 2 · TCP y UDP · expone Erwin · 2:00 (lo edita solo Erwin)
+% Palabras clave en las tarjetas, no oraciones: lo demás se dice.
+% Use \TCP y \UDP para nombrar los protocolos con su color.
+% ---------------------------------------------------------------------
+\begin{frame}{TCP frente a UDP}
+  \begin{columns}[T]
+    \begin{column}{0.47\textwidth}
+      \begin{tarjeta}[equal height group=tcpudp]{bcmTCP}{TCP}
+        \begin{itemize}
+          \item \pend{Erwin}{qué garantiza}
+          \item \pend{Erwin}{cuánto cuesta esa garantía}
+          \item \pend{Erwin}{una aplicación que lo usa}
+        \end{itemize}
+      \end{tarjeta}
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \begin{tarjeta}[equal height group=tcpudp]{bcmUDP}{UDP}
+        \begin{itemize}
+          \item \pend{Erwin}{qué no garantiza}
+          \item \pend{Erwin}{qué gana a cambio}
+          \item \pend{Erwin}{una aplicación que lo usa}
+        \end{itemize}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+  \vspace{0.35cm}
+  {\small\color{bcmGris}\pend{Erwin}{cita de la fuente de esta comparación, con página}\par}
+\end{frame}
+
+\begin{frame}{Cómo se ve en la red}
+  \begin{columns}[c]
+    \begin{column}{0.62\textwidth}
+      \figura{figuras/tcp-udp.pdf}{\linewidth}{5.4cm}{Diagrama propio en draw.io (fuente en
+        \texttt{diagramas/}): establecimiento de conexión de TCP frente al envío de datagramas de UDP,
+        con los colores del tema.}
+    \end{column}
+    \begin{column}{0.34\textwidth}
+      \begin{tarjeta}{bcmTinta}{Qué mirar}
+        \small
+        \pend{Erwin}{las dos o tres cosas del diagrama que vas a señalar}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}

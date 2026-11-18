@@ -1,0 +1,65 @@
+% =====================================================================
+% EXP-1 — Diapositivas (LaTeX Beamer + biblatex IEEE)
+% Compilar: pdflatex diapositivas -> biber diapositivas -> pdflatex x2
+% Cada parte vive en su archivo de contenido/diapositivas/: cada
+% integrante edita SOLO los archivos de sus partes (ver partes.tex).
+% =====================================================================
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{referencias.bib}
+
+\usetheme{bcm}
+
+\input{datos}
+\input{partes}
+
+\title{\tituloexposicion}
+\subtitle{\subtituloexposicion}
+\hypersetup{pdftitle={\codigoactividad: \tituloexposicion}, pdfauthor={Grupo \grupo}}
+
+% Código del ejemplo (parte 4)
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{bcmWS}\bfseries,
+  commentstyle=\color{bcmGris}\itshape,
+  stringstyle=\color{bcmTCP},
+  numbers=left, numberstyle=\tiny\color{bcmGris}, numbersep=6pt,
+  breaklines=true, showstringspaces=false, frame=none,
+  extendedchars=true,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+           {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1
+}
+
+\begin{document}
+
+\portada
+\agenda
+
+\parte{1}  \input{contenido/diapositivas/01-apertura}
+\divisor{2}\input{contenido/diapositivas/02-tcp-udp}
+\divisor{3}\input{contenido/diapositivas/03-websockets}
+\divisor{4}\input{contenido/diapositivas/04-ejemplo}
+\parte{5}  \input{contenido/diapositivas/05-panel-erwin}
+\parte{6}  \input{contenido/diapositivas/06-panel-mario}
+\parte{7}  \input{contenido/diapositivas/07-panel-cesar}
+\parte{8}  \input{contenido/diapositivas/08-comparacion}
+\parte{9}  \input{contenido/diapositivas/09-cierre}
+
+\preguntas
+
+\parte{0}
+\begin{frame}[allowframebreaks]{Referencias}
+  \scriptsize
+  \printbibliography[heading=none]
+\end{frame}
+
+\end{document}

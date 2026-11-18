@@ -1,0 +1,184 @@
+% =====================================================================
+% EXP-1 — Notas de la presentación (2 a 4 páginas sin contar anexos)
+% Compilar: pdflatex notas -> biber notas -> pdflatex x2
+% El guion de cada parte está en contenido/notas/: cada integrante edita
+% SOLO los archivos de sus partes (ver partes.tex).
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage[default]{sourcesanspro}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{bcm-comun}
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{referencias.bib}
+\usepackage[hidelinks]{hyperref}
+
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
+
+\input{datos}
+\input{partes}
+
+\hypersetup{pdftitle={\codigoactividad: notas de la presentación}, pdfauthor={Grupo \grupo}}
+
+% Encabezado de cada parte del guion: \guion{n}
+\newcommand{\guion}[1]{%
+  \subsection*{\textcolor{bcmAcento}{0#1}\enspace\tituloParte{#1}}
+  \vspace{-0.4em}
+  {\small\color{bcmGris}Expone \textbf{\exponeParte{#1}}\enspace\textperiodcentered\enspace
+    dura \duraParte{#1}\enspace\textperiodcentered\enspace empieza en \iniciaParte{#1}\par}
+  \smallskip}
+
+\begin{document}
+
+% ---------------- Encabezado ----------------
+\begin{tcolorbox}[enhanced, frame hidden, sharp corners, colback=bcmTinta, coltext=bcmPapel,
+    left=12pt, right=12pt, top=10pt, bottom=10pt]
+  {\small\color{bcmGris}Aplicaciones Distribuidas (ISR-701)\enspace\textperiodcentered\enspace UTEQ
+    \enspace\textperiodcentered\enspace SPA 2026--2027\par}
+  \smallskip
+  {\Large\bfseries\codigoactividad: \tituloexposicion\par}
+  {\color{bcmGris}Notas de la presentación\enspace\textperiodcentered\enspace Grupo \grupo
+    \enspace\textperiodcentered\enspace\fechaexposicion\par}
+  \medskip
+  {\small\foreach \id in \bcmIntegrantes {\nombreCompleto{\id}\par}}
+  \smallskip
+  {\small\color{bcmGris}Docente: \docente\enspace\textperiodcentered\enspace
+    Repositorio: \textcolor{bcmPapel}{\url{\repositorio}}\par}
+\end{tcolorbox}
+
+% ---------------- 1. Reparto ----------------
+\section{Reparto y tiempos}
+
+\renewcommand{\bcmFila}[1]{%
+  \textcolor{bcmAcento}{\bfseries 0#1} & \tituloParte{#1} & \exponeParte{#1} &
+  \iniciaParte{#1} & \duraParte{#1}\\}
+\bcmPrepararFilas
+\begin{table}[H]
+  \centering
+  \caption{Partes de la exposición, quién las expone y tiempos}
+  \label{tab:reparto}
+  \begin{tabular}{@{}rllrr@{}}
+    \toprule
+    & \textbf{Parte} & \textbf{Expone} & \textbf{Inicio} & \textbf{Duración}\\
+    \midrule
+    \the\bcmFilas
+    \midrule
+    & Preguntas & Todos & \bcmTiempo{\bcmTotalSeg} & 3:00\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Tiempo de cada integrante:
+\foreach \id [count=\n] in \bcmIntegrantes {\ifnum\n>1 ; \fi\nombreCorto{\id}, \totalDe{\id}}.
+La presentación dura \bcmTiempo{\bcmTotalSeg}; si pasa de 12:00 se interrumpe y lo que no se
+alcanzó a presentar no se califica. Nadie lee de las diapositivas ni del celular, y en las
+preguntas cualquiera de los tres responde sobre cualquier parte.
+
+% ---------------- 2. Guion ----------------
+\section{Guion de cada parte}
+
+\guion{1}\input{contenido/notas/01-apertura}
+\guion{2}\input{contenido/notas/02-tcp-udp}
+\guion{3}\input{contenido/notas/03-websockets}
+\guion{4}\input{contenido/notas/04-ejemplo}
+\guion{5}\input{contenido/notas/05-panel-erwin}
+\guion{6}\input{contenido/notas/06-panel-mario}
+\guion{7}\input{contenido/notas/07-panel-cesar}
+\guion{8}\input{contenido/notas/08-comparacion}
+\guion{9}\input{contenido/notas/09-cierre}
+
+% ---------------- 3. Preguntas ----------------
+\section{Preguntas}
+
+\input{contenido/notas/preguntas}
+
+% ---------------- 4. Aportes ----------------
+\section{Tabla de aportes}
+
+% Cada quien llena SU fila. Los aportes deben coincidir con los commits
+% del repositorio (git log --author).
+\begin{table}[H]
+  \centering
+  \caption{Aporte de cada integrante}
+  \label{tab:aportes}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lXX@{}}
+    \toprule
+    \textbf{Integrante} & \textbf{Partes, figuras y evidencias} & \textbf{Referencias que aportó}\\
+    \midrule
+    \nombreCompleto{erwin} & \pend{Erwin}{} & \pend{Erwin}{}\\
+    \nombreCompleto{mario} & \pend{Mario}{} & \pend{Mario}{}\\
+    \nombreCompleto{cesar} & \pend{César}{} & \pend{César}{}\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% ---------------- 5. Declaración de IA ----------------
+\section{Declaración de uso de inteligencia artificial}
+
+% Una fila por cada uso real, de cada integrante. La primera fila describe
+% lo que hizo Claude en la sesión del 18/11/2026; la verificación la
+% escribe el grupo cuando la haya hecho.
+\begin{table}[H]
+  \centering
+  \caption{Herramientas de inteligencia artificial usadas como apoyo}
+  \label{tab:declaracion-ia}
+  \small
+  \begin{tabularx}{\textwidth}{@{}p{2.6cm}p{1.6cm}XX@{}}
+    \toprule
+    \textbf{Herramienta} & \textbf{Versión} & \textbf{Para qué se usó} & \textbf{Cómo se verificó}\\
+    \midrule
+    Claude (Anthropic), en Claude Code & Opus 5.5 &
+    Plantilla de las diapositivas (tema visual en Beamer) y de estas notas, estructura de carpetas,
+    y propuesta de reparto de partes y tiempos. No redactó el contenido de las diapositivas ni del
+    guion, ni buscó referencias. &
+    \pend{Grupo}{cómo revisaron la plantilla y el reparto}\\
+    \pend{Grupo}{} & & & \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\printbibliography[heading=bibintoc, title={Referencias}]
+
+% ---------------- Anexos ----------------
+\clearpage
+\appendix
+\section{Esquema inicial a mano}
+
+% Foto del primer esquema en papel, con los nombres de los tres y la fecha.
+\begin{figure}[H]
+  \centering
+  \figura{evidencias/esquema-inicial.jpg}{0.8\textwidth}{9cm}{Foto del esquema inicial hecho a mano,
+    con los nombres de los tres integrantes y la fecha.}
+  \caption{Esquema inicial de la exposición, hecho a mano por el grupo}
+  \label{fig:esquema}
+\end{figure}
+
+\section{Artículos citados, anotados}
+
+% Al menos 3 capturas de artículos citados, subrayados o anotados, con la
+% página visible. Pongan en el pie qué referencia es (\cite) y qué página.
+\begin{figure}[H]
+  \centering
+  \figura{evidencias/articulo-1.png}{0.31\textwidth}{6cm}{Captura de un artículo citado, subrayado
+    o anotado, con la página.}\hfill
+  \figura{evidencias/articulo-2.png}{0.31\textwidth}{6cm}{Captura de un artículo citado, subrayado
+    o anotado, con la página.}\hfill
+  \figura{evidencias/articulo-3.png}{0.31\textwidth}{6cm}{Captura de un artículo citado, subrayado
+    o anotado, con la página.}
+  \caption{Artículos citados, anotados por el grupo: \pend{Grupo}{referencia y página de cada captura}}
+  \label{fig:articulos}
+\end{figure}
+
+\end{document}

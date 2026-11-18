@@ -1,0 +1,172 @@
+% =====================================================================
+% bcm-comun.sty — colores, reparto y marcadores de pendientes
+% Lo usan diapositivas.tex (a través de beamerthemebcm.sty) y notas.tex.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bcm-comun}[2026/11/18 Comun del grupo BCM (EXP-1)]
+
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,babel}
+\RequirePackage[most]{tcolorbox}
+
+% ---------------------------------------------------------------------
+% Paleta. Cada protocolo tiene SU color y se usa igual en todo el
+% material (texto, tarjetas y diagramas de draw.io):
+%   TCP = verde azulado · UDP = ámbar · WebSocket = violeta.
+% El coral solo marca «dónde estamos» y lo que hay que mirar.
+% ---------------------------------------------------------------------
+\definecolor{bcmTinta}{HTML}{10162F}
+\definecolor{bcmPapel}{HTML}{F7F5F0}
+\definecolor{bcmTCP}{HTML}{0E7C7B}
+\definecolor{bcmUDP}{HTML}{D08A1E}
+\definecolor{bcmWS}{HTML}{6A4C93}
+\definecolor{bcmAcento}{HTML}{E4572E}
+\definecolor{bcmGris}{HTML}{8A8FA3}
+\definecolor{bcmPendiente}{HTML}{9A5B00}
+
+% ---------------------------------------------------------------------
+% Reparto (los datos están en partes.tex)
+% ---------------------------------------------------------------------
+\newcount\bcmK
+\newcount\bcmSeg
+\newtoks\bcmFilas
+\def\bcmNumPartes{0}
+\def\bcmTotalSeg{0}
+
+% \definirintegrante{id}{nombre corto}{nombre completo}
+\def\bcmIntegrantes{}
+\newcommand{\definirintegrante}[3]{%
+  \expandafter\def\csname bcmNC@#1\endcsname{#2}%
+  \expandafter\def\csname bcmNL@#1\endcsname{#3}%
+  \ifx\bcmIntegrantes\@empty\xdef\bcmIntegrantes{#1}%
+  \else\xdef\bcmIntegrantes{\bcmIntegrantes,#1}\fi}
+
+% \definirparte{título corto}{id}{segundos}  (se numeran solas: 1, 2, ...)
+\newcommand{\definirparte}[3]{%
+  \xdef\bcmNumPartes{\the\numexpr\bcmNumPartes+1\relax}%
+  \expandafter\gdef\csname bcmT\bcmNumPartes\endcsname{#1}%
+  \expandafter\xdef\csname bcmE\bcmNumPartes\endcsname{#2}%
+  \expandafter\xdef\csname bcmS\bcmNumPartes\endcsname{#3}%
+  \expandafter\xdef\csname bcmI\bcmNumPartes\endcsname{\bcmTotalSeg}%
+  \xdef\bcmTotalSeg{\the\numexpr\bcmTotalSeg+#3\relax}}
+
+\newcommand{\bcmCalcularTotal}{%
+  \ifnum\bcmTotalSeg>720
+    \PackageWarningNoLine{bcm-comun}{El reparto suma \bcmTotalSeg\space s: pasa de los 12 minutos}%
+  \fi}
+
+% Segundos -> m:ss  (\numexpr redondea; (s+30)/60-1 da la parte entera)
+\newcommand{\bcmTiempo}[1]{%
+  \the\numexpr(#1+30)/60-1\relax:%
+  \ifnum\numexpr(#1)-60*((#1+30)/60-1)\relax<10 0\fi
+  \the\numexpr(#1)-60*((#1+30)/60-1)\relax}
+
+% Datos de la parte n
+\newcommand{\tituloParte}[1]{\csname bcmT#1\endcsname}
+\newcommand{\exponeParte}[1]{\csname bcmNC@\csname bcmE#1\endcsname\endcsname}
+\newcommand{\duraParte}[1]{\bcmTiempo{\csname bcmS#1\endcsname}}
+\newcommand{\iniciaParte}[1]{\bcmTiempo{\csname bcmI#1\endcsname}}
+\newcommand{\nombreCorto}[1]{\csname bcmNC@#1\endcsname}
+\newcommand{\nombreCompleto}[1]{\csname bcmNL@#1\endcsname}
+
+% Tiempo total de un integrante: \totalDe{mario}
+\newcommand{\totalDe}[1]{%
+  \bcmK=0 \bcmSeg=0
+  \loop\ifnum\bcmK<\bcmNumPartes
+    \advance\bcmK by 1
+    \edef\bcmTmp{\csname bcmE\the\bcmK\endcsname}%
+    \ifnum\pdfstrcmp{\bcmTmp}{#1}=0
+      \advance\bcmSeg by \csname bcmS\the\bcmK\endcsname\relax
+    \fi
+  \repeat
+  \bcmTiempo{\the\bcmSeg}}
+
+% Filas de tabla: cada documento define \bcmFila{n} y luego usa
+% \bcmPrepararFilas y \the\bcmFilas dentro del tabular.
+\newcommand{\bcmFila}[1]{}
+\newcommand{\bcmPrepararFilas}{%
+  \bcmFilas={}\bcmK=0
+  \loop\ifnum\bcmK<\bcmNumPartes
+    \advance\bcmK by 1
+    \edef\bcmTmp{\the\bcmFilas\noexpand\bcmFila{\the\bcmK}}%
+    \bcmFilas=\expandafter{\bcmTmp}%
+  \repeat}
+
+% Parte actual (la usa la barra de tiempo de las diapositivas)
+\newcounter{bcmparte}
+\newcommand{\parte}[1]{\setcounter{bcmparte}{#1}}
+
+% Barra de tiempo proporcional, para usar dentro de un tikzpicture:
+% \bcmDibujarBarra{ancho}{alto}{1 = con números | 0 = sin números}
+\colorlet{bcmBarraPasada}{bcmGris!70}
+\colorlet{bcmBarraFutura}{bcmGris!30}
+\newcommand{\bcmDibujarBarra}[3]{%
+  \gdef\bcmAcum{0}%
+  \foreach \i in {1,...,\bcmNumPartes}{%
+    \pgfmathsetlengthmacro{\bcmIni}{(#1)*(\bcmAcum/\bcmTotalSeg)}%
+    \xdef\bcmAcum{\the\numexpr\bcmAcum+\csname bcmS\i\endcsname\relax}%
+    \pgfmathsetlengthmacro{\bcmFin}{(#1)*(\bcmAcum/\bcmTotalSeg)}%
+    \ifnum\i<\value{bcmparte}\def\bcmc{bcmBarraPasada}%
+    \else\ifnum\i=\value{bcmparte}\def\bcmc{bcmAcento}%
+    \else\def\bcmc{bcmBarraFutura}\fi\fi
+    \fill[\bcmc] (\bcmIni+0.7pt,0) rectangle (\bcmFin-0.7pt,#2);
+    \ifnum#3=1
+      \node[font=\tiny\bfseries, text=\bcmc, anchor=south, inner sep=1.5pt]
+        at ($(\bcmIni,#2)!0.5!(\bcmFin,#2)$) {\i};
+    \fi
+  }}
+
+% ---------------------------------------------------------------------
+% Pendientes y figuras que todavía no existen
+% ---------------------------------------------------------------------
+% \pendiente{Quién}{Qué falta}: recuadro ámbar visible en el PDF.
+% Antes de entregar no debe quedar ninguno: búsquenlos con
+%   git grep -n "\\pendiente\|\\pend{"
+% El log también los lista («Package bcm-comun Warning: Pendiente ...»).
+\DeclareRobustCommand{\pendiente}[2]{%
+  \PackageWarningNoLine{bcm-comun}{Pendiente de #1}%
+  \begin{tcolorbox}[enhanced, frame hidden, sharp corners,
+      colback=bcmUDP!10, borderline={0.6pt}{0pt}{bcmUDP, dashed},
+      left=5pt, right=5pt, top=3pt, bottom=3pt, before skip=3pt, after skip=3pt,
+      fontupper=\footnotesize\color{bcmPendiente}]
+    \textbf{Pendiente (#1):} #2
+  \end{tcolorbox}}
+
+% \pend{Quién}{Qué}: lo mismo, en línea (dentro de tarjetas y tablas).
+\DeclareRobustCommand{\pend}[2]{%
+  \PackageWarningNoLine{bcm-comun}{Pendiente de #1}%
+  {\color{bcmPendiente}\itshape[#1: #2]}}
+
+% \figura{ruta con extensión}{ancho}{alto}{qué debe mostrar}
+% Si el archivo existe lo incluye; si no, dibuja un recuadro con lo que falta.
+\newcommand{\figura}[4]{%
+  \IfFileExists{#1}{%
+    \includegraphics[width=#2,height=#3,keepaspectratio]{#1}%
+  }{%
+    \PackageWarningNoLine{bcm-comun}{Falta la figura #1}%
+    \begin{tikzpicture}
+      \draw[bcmGris, dashed, rounded corners=3pt, fill=white] (0,0) rectangle (#2,#3);
+      \node[align=center, text width=\dimexpr#2-1.2em\relax, font=\scriptsize, text=bcmGris]
+        at ($(0,0)!0.5!(#2,#3)$)
+        {\textbf{Falta \texttt{\detokenize{#1}}}\\[2pt]#4};
+    \end{tikzpicture}%
+  }}
+
+% Etiquetas de protocolo: \TCP, \UDP, \WS
+\newcommand{\etiqueta}[2]{%
+  \tcbox[on line, colback=#1, colframe=#1, coltext=white, arc=5pt,
+    boxsep=0pt, left=4pt, right=4pt, top=1.5pt, bottom=1.5pt,
+    fontupper=\scriptsize\bfseries]{#2}}
+\newcommand{\TCP}{\etiqueta{bcmTCP}{TCP}}
+\newcommand{\UDP}{\etiqueta{bcmUDP}{UDP}}
+\newcommand{\WS}{\etiqueta{bcmWS}{WebSocket}}
+
+% Tarjeta con franja superior de color:
+% \begin{tarjeta}[opciones tcolorbox]{color}{título} ... \end{tarjeta}
+\newtcolorbox{tarjeta}[3][]{enhanced, frame hidden, sharp corners, colback=white,
+  left=7pt, right=7pt, top=8pt, bottom=5pt, before skip=2pt, after skip=5pt,
+  overlay={\fill[#2] (frame.north west) rectangle ([yshift=-3pt]frame.north east);},
+  before upper={{\bfseries\color{#2}#3\par}\smallskip}, #1}
+
+\endinput

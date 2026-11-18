@@ -1,0 +1,25 @@
+% =====================================================================
+% Reparto de la exposición: fuente única para diapositivas.tex y notas.tex
+% =====================================================================
+% Si cambian el orden, el título corto, quién expone o el tiempo de una
+% parte, cámbienlo SOLO aquí: la agenda, la barra de tiempo de cada
+% diapositiva y la tabla de las notas se actualizan solas.
+% El total debe ser 12:00 (720 s); si pasa, LaTeX lo avisa en el log.
+
+% \definirintegrante{id}{nombre corto}{nombre completo como en el SGA}
+\definirintegrante{erwin}{Erwin}{Bueno Troya Erwin Daniel}
+\definirintegrante{mario}{Mario}{Castro Coello Mario Sebastián}
+\definirintegrante{cesar}{César}{Macías Vásquez César Abrahan}
+
+% \definirparte{título corto}{id de quien expone}{segundos}
+\definirparte{Apertura}{mario}{30}                   % 1
+\definirparte{TCP y UDP}{erwin}{120}                 % 2
+\definirparte{WebSockets}{mario}{120}                % 3
+\definirparte{Ejemplo sencillo}{cesar}{120}          % 4
+\definirparte{Panel de Erwin}{erwin}{90}             % 5
+\definirparte{Panel de Mario}{mario}{90}             % 6
+\definirparte{Panel de César}{cesar}{90}             % 7
+\definirparte{Comparación de paneles}{erwin}{30}     % 8
+\definirparte{Lecciones y cierre}{cesar}{30}         % 9
+
+\bcmCalcularTotal

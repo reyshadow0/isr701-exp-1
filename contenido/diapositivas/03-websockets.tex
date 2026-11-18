@@ -1,0 +1,63 @@
+% ---------------------------------------------------------------------
+% Parte 3 · WebSockets · expone Mario · 2:00 (lo edita solo Mario)
+% Tres diapositivas: el diagrama, la comparación y un dato con cita.
+% ---------------------------------------------------------------------
+\begin{frame}{Del HTTP al WebSocket}
+  \begin{columns}[c]
+    \begin{column}{0.62\textwidth}
+      \figura{figuras/websocket-handshake.pdf}{\linewidth}{5.4cm}{Diagrama de secuencia propio en
+        draw.io (fuente en \texttt{diagramas/}): cliente y servidor, petición de cambio de protocolo,
+        respuesta y mensajes en los dos sentidos.}
+    \end{column}
+    \begin{column}{0.34\textwidth}
+      \begin{tarjeta}{bcmWS}{En una frase}
+        \small\pend{Mario}{qué es un WebSocket, en tus palabras}
+      \end{tarjeta}
+      \begin{tarjeta}{bcmTinta}{Qué mirar}
+        \small\pend{Mario}{lo que vas a señalar en el diagrama}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% Las tres columnas son una sugerencia: cámbienlas si comparan otras
+% alternativas (por ejemplo, Server-Sent Events).
+\begin{frame}{¿Cómo se entera el cliente de un cambio?}
+  \begin{columns}[T]
+    \begin{column}{0.31\textwidth}
+      \begin{tarjeta}[equal height group=alternativas]{bcmGris}{Polling}
+        \small
+        \pend{Mario}{cómo funciona, en una línea}\par\medskip
+        \pend{Mario}{su costo}
+      \end{tarjeta}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{tarjeta}[equal height group=alternativas]{bcmGris}{Long polling}
+        \small
+        \pend{Mario}{cómo funciona, en una línea}\par\medskip
+        \pend{Mario}{su costo}
+      \end{tarjeta}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{tarjeta}[equal height group=alternativas]{bcmWS}{WebSocket}
+        \small
+        \pend{Mario}{cómo funciona, en una línea}\par\medskip
+        \pend{Mario}{su costo}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Un dato}
+  \begin{columns}[c]
+    \begin{column}{0.45\textwidth}
+      \centering
+      {\color{bcmWS}\fontsize{40}{44}\selectfont\bfseries\pend{Mario}{cifra}\par}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \pend{Mario}{qué se midió, dónde y frente a qué; un resultado concreto del estudio, no una idea
+        del resumen}\par\medskip
+      {\small\color{bcmGris}\pend{Mario}{cita con página de un artículo indexado con DOI}\par}
+    \end{column}
+  \end{columns}
+\end{frame}

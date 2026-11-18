@@ -1,0 +1,195 @@
+% =====================================================================
+% beamerthemebcm.sty — tema propio del grupo BCM para EXP-1
+% ---------------------------------------------------------------------
+% Ideas del diseño:
+%  - Fondo papel para el contenido y tinta (azul noche) para portada,
+%    separadores y preguntas: el cambio de fondo marca el cambio de parte.
+%  - Un color por protocolo (TCP, UDP, WebSocket), siempre el mismo.
+%  - Abajo, una barra proporcional al tiempo de cada parte: el segmento
+%    coral es la parte actual y el pie dice quién expone y cuánto dura.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemebcm}[2026/11/18 Tema del grupo BCM (EXP-1)]
+
+\RequirePackage{bcm-comun}
+\RequirePackage[default]{sourcesanspro}
+\RequirePackage[scale=0.88]{sourcecodepro}
+
+\setbeamersize{text margin left=1.1cm, text margin right=1.1cm}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}{}
+
+% ---------------- Colores ----------------
+\setbeamercolor{background canvas}{bg=bcmPapel}
+\setbeamercolor{normal text}{fg=bcmTinta}
+\setbeamercolor{structure}{fg=bcmTinta}
+\setbeamercolor{alerted text}{fg=bcmAcento}
+\setbeamercolor{frametitle}{fg=bcmTinta}
+\setbeamercolor{framesubtitle}{fg=bcmGris}
+
+% ---------------- Fuentes ----------------
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\normalsize, series=\mdseries}
+
+% ---------------- Título de cada diapositiva ----------------
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip0.5cm
+  \begin{beamercolorbox}[wd=\paperwidth, leftskip=1.1cm, rightskip=1.1cm plus 1fil]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par
+    \ifx\insertframesubtitle\@empty\else
+      \vskip0.06cm
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+    \fi
+    \vskip0.14cm
+    {\color{bcmAcento}\rule{1.2cm}{2.5pt}}\par
+  \end{beamercolorbox}%
+  \vskip0.15cm}
+
+% ---------------- Pie: parte actual, quién expone y barra de tiempo ----------------
+\setbeamertemplate{footline}{%
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle (\paperwidth,0.72cm);
+    \ifnum\value{bcmparte}>0
+      \node[anchor=west, font=\scriptsize\bfseries, text=bcmTinta] at (1.1cm,0.38cm)
+        {\textcolor{bcmAcento}{0\arabic{bcmparte}}\enspace\tituloParte{\arabic{bcmparte}}};
+      \node[anchor=east, font=\scriptsize, text=bcmGris] at (\paperwidth-1.1cm,0.38cm)
+        {Expone \textbf{\exponeParte{\arabic{bcmparte}}}\enspace\textperiodcentered\enspace
+         \duraParte{\arabic{bcmparte}} min\qquad\insertframenumber/\inserttotalframenumber};
+    \else
+      \node[anchor=west, font=\scriptsize\bfseries, text=bcmGris] at (1.1cm,0.38cm)
+        {Grupo \grupo\enspace\textperiodcentered\enspace\codigoactividad};
+      \node[anchor=east, font=\scriptsize, text=bcmGris] at (\paperwidth-1.1cm,0.38cm)
+        {\insertframenumber/\inserttotalframenumber};
+    \fi
+    \bcmDibujarBarra{\paperwidth}{3pt}{0}
+  \end{tikzpicture}}
+
+% ---------------- Listas ----------------
+\setbeamertemplate{itemize item}{\textcolor{bcmAcento}{\rule[0.28ex]{0.42em}{0.42em}}}
+\setbeamertemplate{itemize subitem}{\textcolor{bcmGris}{\rule[0.32ex]{0.32em}{0.32em}}}
+\setbeamertemplate{enumerate item}{\textcolor{bcmAcento}{\bfseries\insertenumlabel.}}
+\setlength{\leftmargini}{1.1em}
+
+% ---------------- Bibliografía (biblatex, estilo ieee) ----------------
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamercolor{bibliography item}{fg=bcmTinta}
+\setbeamercolor{bibliography entry author}{fg=bcmTinta}
+\setbeamercolor{bibliography entry title}{fg=bcmTinta}
+\setbeamercolor{bibliography entry location}{fg=bcmGris}
+\setbeamercolor{bibliography entry note}{fg=bcmGris}
+
+% =====================================================================
+% Diapositivas especiales
+% =====================================================================
+
+% Motivo de la portada: TCP llega en orden, UDP llega como puede
+% (uno se pierde) y WebSocket va en los dos sentidos.
+\newcommand{\bcmMotivo}{%
+  \begin{tikzpicture}[x=1cm, y=1cm]
+    \node[anchor=west, font=\scriptsize\bfseries, text=bcmTCP, inner sep=0] at (0,3.05) {TCP};
+    \foreach \k in {0,...,5} \fill[bcmTCP] (\k*0.62,2.35) rectangle ++(0.42,0.42);
+    \node[anchor=west, font=\scriptsize\bfseries, text=bcmUDP, inner sep=0] at (0,1.75) {UDP};
+    \foreach \k/\dy in {0/0.06, 1/-0.10, 3/0.12, 4/-0.05, 5/0.09}
+      \fill[bcmUDP] (\k*0.62+0.04*\k, 1.05+\dy) rectangle ++(0.42,0.42);
+    \draw[bcmUDP, dashed, line width=0.6pt] (2*0.62+0.08, 1.05) rectangle ++(0.42,0.42);
+    \node[anchor=west, font=\scriptsize\bfseries, text=bcmWS, inner sep=0] at (0,0.45) {WebSocket};
+    \draw[bcmWS, line width=1.2pt, <->, >=stealth] (0,-0.35) -- (3.52,-0.35);
+    \foreach \k in {0.35,1.55,2.75} \fill[bcmWS] (\k,-0.2) rectangle ++(0.3,0.3);
+    \foreach \k in {0.95,2.15} \fill[bcmWS!55] (\k,-0.8) rectangle ++(0.3,0.3);
+  \end{tikzpicture}}
+
+% Fondo oscuro para un grupo de diapositivas
+\newcommand{\bcmFondoOscuro}{%
+  \setbeamercolor{background canvas}{bg=bcmTinta}%
+  \colorlet{bcmBarraPasada}{bcmPapel!45!bcmTinta}%
+  \colorlet{bcmBarraFutura}{bcmPapel!14!bcmTinta}}
+
+% Portada
+\newcommand{\portada}{%
+  {\bcmFondoOscuro\parte{0}%
+  \begin{frame}[plain]
+    \begin{columns}[c]
+      \begin{column}{0.6\textwidth}
+        {\color{bcmGris}\small Aplicaciones Distribuidas (ISR-701)\enspace\textperiodcentered\enspace\codigoactividad\par}
+        \vspace{0.45cm}
+        {\color{bcmPapel}\fontsize{30}{34}\selectfont\bfseries\inserttitle\par}
+        \vspace{0.25cm}
+        {\color{bcmGris}\large\insertsubtitle\par}
+        \vspace{0.35cm}
+        {\color{bcmAcento}\rule{1.6cm}{3pt}\par}
+        \vspace{0.55cm}
+        {\color{bcmPapel}\small
+          \foreach \id in \bcmIntegrantes {\nombreCompleto{\id}\par}}
+        \vspace{0.3cm}
+        {\color{bcmGris}\scriptsize Grupo \grupo\enspace\textperiodcentered\enspace UTEQ\enspace\textperiodcentered\enspace\fechaexposicion\par}
+      \end{column}
+      \begin{column}{0.34\textwidth}
+        \hfill\bcmMotivo
+      \end{column}
+    \end{columns}
+  \end{frame}}}
+
+% Ruta de la exposición (se arma sola con partes.tex)
+\newcommand{\bcmFilaAgenda}[1]{%
+  \textcolor{bcmAcento}{\bfseries 0#1} & \tituloParte{#1} & \exponeParte{#1} &
+  \textcolor{bcmGris}{\iniciaParte{#1}} &
+  \textcolor{bcmTinta!80}{\rule[-0.15ex]{\dimexpr 0.015cm*\csname bcmS#1\endcsname\relax}{1.5ex}}%
+  \enspace{\scriptsize\duraParte{#1}}\\[0.5pt]}
+\newcommand{\agenda}{%
+  \parte{0}%
+  \let\bcmFila\bcmFilaAgenda
+  \bcmPrepararFilas
+  \begin{frame}{Ruta de 12 minutos}
+    \begin{columns}[T]
+      \begin{column}{0.68\textwidth}
+        \footnotesize
+        \begin{tabular}{@{}r l l r l@{}}
+          & \textcolor{bcmGris}{\scriptsize Parte} & \textcolor{bcmGris}{\scriptsize Expone}
+          & \textcolor{bcmGris}{\scriptsize Inicio} & \textcolor{bcmGris}{\scriptsize Duración}\\[2pt]
+          \the\bcmFilas
+        \end{tabular}
+      \end{column}
+      \begin{column}{0.27\textwidth}
+        \begin{tarjeta}{bcmTinta}{Cada uno}
+          \small
+          \foreach \id in \bcmIntegrantes {\nombreCorto{\id}\hfill\totalDe{\id}\par}
+          \smallskip
+          {\color{bcmGris}Preguntas\hfill 3:00\par}
+        \end{tarjeta}
+      \end{column}
+    \end{columns}
+  \end{frame}}
+
+% Separador de parte: \divisor{n}
+\newcommand{\divisor}[1]{%
+  \parte{#1}%
+  {\bcmFondoOscuro
+  \begin{frame}[plain]
+    \vfill
+    {\color{bcmAcento}\fontsize{66}{66}\selectfont\bfseries 0#1\par}
+    \vspace{0.25cm}
+    {\color{bcmPapel}\fontsize{30}{34}\selectfont\bfseries\tituloParte{#1}\par}
+    \vspace{0.35cm}
+    {\color{bcmGris}\large Expone {\color{bcmPapel}\bfseries\exponeParte{#1}}\enspace\textperiodcentered\enspace
+      \duraParte{#1} min\enspace\textperiodcentered\enspace empieza en \iniciaParte{#1}\par}
+    \vfill
+    \begin{tikzpicture}\bcmDibujarBarra{\textwidth}{5pt}{1}\end{tikzpicture}
+    \vspace{0.3cm}
+  \end{frame}}}
+
+% Turno de preguntas
+\newcommand{\preguntas}{%
+  {\bcmFondoOscuro\parte{0}%
+  \begin{frame}[plain]
+    \vfill
+    {\color{bcmPapel}\fontsize{40}{44}\selectfont\bfseries Preguntas\par}
+    \vspace{0.3cm}
+    {\color{bcmAcento}\rule{1.6cm}{3pt}\par}
+    \vspace{0.35cm}
+    {\color{bcmGris}\large 3 minutos\enspace\textperiodcentered\enspace responde cualquiera del grupo\par}
+    \vfill
+    {\color{bcmGris}\scriptsize Repositorio: \url{\repositorio}\par}
+    \vspace{0.3cm}
+  \end{frame}}}
+
+\endinput
