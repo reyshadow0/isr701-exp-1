@@ -1,12 +1,9 @@
 % ---------------------------------------------------------------------
 % Parte 2 · TCP y UDP · Erwin · 2:00 (lo edita solo Erwin)
-% Escribe lo que vas a decir, en tus palabras y en 4 a 6 líneas: es tu
-% guion, no una copia de las diapositivas. Cita cada dato (\cite[p.~X]{clave}).
-% Preguntas guía (bórralas cuando termines):
-%   - ¿En qué capa están TCP y UDP y qué problema resuelven?
-%   - ¿Qué garantiza TCP que UDP no, y cuánto cuesta esa garantía?
-%   - ¿Qué aplicación que usas de primera mano va por UDP, y por qué?
-%   - ¿Qué fuente (con página) respalda la comparación?
-%   - ¿Con qué frase le pasas la palabra a Mario?
 % ---------------------------------------------------------------------
-\pendiente{Erwin}{guion de esta parte (4 a 6 líneas) con las citas de cada dato.}
+TCP y UDP están en la capa de transporte. Los dos mueven datos entre procesos de distintas máquinas, pero con una idea muy diferente.
+TCP no envía nada hasta abrir la conexión con un handshake de tres pasos, y después numera los segmentos para que todo llegue completo y en el orden correcto \cite[p.~7]{barghash2022}.
+Eso tiene un precio: cada envío espera su confirmación, y si algo se pierde hay que mandarlo otra vez, así que se demora más.
+UDP no hace handshake ni revisa si los datagramas llegaron \cite[pp.~7--8]{barghash2022}. Es más liviano y por eso se usa donde perder un poco de información no importa tanto.
+Pasa en una videollamada de Meet: si se pierde un pedazo de imagen ya no sirve pedirlo de nuevo, porque ese momento ya pasó.
+Para el panel necesitamos que el servidor también pueda hablar primero. WebSocket hace eso y va sobre TCP, y es lo que les explica Mario.
