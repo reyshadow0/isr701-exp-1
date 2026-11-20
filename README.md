@@ -55,7 +55,7 @@ El resultado es `diapositivas.pdf` y `notas.pdf`.
 ### Dependencias
 
 Paquetes de LaTeX: `beamer`, `fontenc`, `inputenc`, `babel` (idioma `spanish`), `sourcesanspro`,
-`sourcecodepro`, `csquotes`, `booktabs`, `tabularx`, `listings`, `tikz`, `tcolorbox`, `geometry`,
+`sourcecodepro`, `csquotes`, `booktabs`, `tabularx`, `xltabular`, `listings`, `tikz`, `tcolorbox`, `geometry`,
 `microtype`, `graphicx`, `float`, `biblatex` con `biblatex-ieee`, y `hyperref`. Además se necesita el
 programa `biber`. MiKTeX instala automáticamente los paquetes que falten; en TeX Live vienen incluidos
 en el esquema completo (`scheme-full`).

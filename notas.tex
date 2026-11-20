@@ -15,6 +15,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{xltabular}
 \usepackage{float}
 \usepackage{csquotes}
 \usepackage{bcm-comun}
@@ -108,46 +109,50 @@ preguntas cualquiera de los tres responde sobre cualquier parte.
 
 % Cada quien llena SU fila. Los aportes deben coincidir con los commits
 % del repositorio (git log --author).
-\begin{table}[H]
-  \centering
-  \caption{Aporte de cada integrante}
-  \label{tab:aportes}
-  \small
-  \begin{tabularx}{\textwidth}{@{}lXX@{}}
-    \toprule
-    \textbf{Integrante} & \textbf{Partes, figuras y evidencias} & \textbf{Referencias que aportó}\\
-    \midrule
-    \nombreCompleto{erwin} & \pend{Erwin}{} & \pend{Erwin}{}\\
-    \nombreCompleto{mario} & \pend{Mario}{} & \pend{Mario}{}\\
-    \nombreCompleto{cesar} & \pend{César}{} & \pend{César}{}\\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+% xltabular: la tabla puede partirse entre páginas y repite el encabezado.
+{\small\renewcommand{\arraystretch}{1.2}
+\begin{xltabular}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.8cm}X>{\raggedright\arraybackslash}p{4.4cm}@{}}
+  \caption{Aporte de cada integrante}\label{tab:aportes}\\
+  \toprule
+  \textbf{Integrante} & \textbf{Partes, figuras y evidencias} & \textbf{Referencias que aportó}\\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{Integrante} & \textbf{Partes, figuras y evidencias} & \textbf{Referencias que aportó}\\
+  \midrule
+  \endhead
+  \bottomrule
+  \endlastfoot
+  \nombreCompleto{erwin} & \pend{Erwin}{} & \pend{Erwin}{}\\
+  \nombreCompleto{mario} & \pend{Mario}{} & \pend{Mario}{}\\
+  \nombreCompleto{cesar} & \pend{César}{} & \pend{César}{}\\
+\end{xltabular}}
 
 % ---------------- 5. Declaración de IA ----------------
 \section{Declaración de uso de inteligencia artificial}
 
-% Una fila por cada uso real, de cada integrante. La primera fila describe
-% lo que hizo Claude en la sesión del 18/11/2026; la verificación la
-% escribe el grupo cuando la haya hecho.
-\begin{table}[H]
-  \centering
-  \caption{Herramientas de inteligencia artificial usadas como apoyo}
-  \label{tab:declaracion-ia}
-  \small
-  \begin{tabularx}{\textwidth}{@{}p{2.6cm}p{1.6cm}XX@{}}
-    \toprule
-    \textbf{Herramienta} & \textbf{Versión} & \textbf{Para qué se usó} & \textbf{Cómo se verificó}\\
-    \midrule
-    Claude (Anthropic), en Claude Code & Opus 5.5 &
-    Plantilla de las diapositivas (tema visual en Beamer) y de estas notas, estructura de carpetas,
-    y propuesta de reparto de partes y tiempos. No redactó el contenido de las diapositivas ni del
-    guion, ni buscó referencias. &
-    \pend{Grupo}{cómo revisaron la plantilla y el reparto}\\
-    \pend{Grupo}{} & & & \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+% Una fila por cada uso real, de cada integrante, escrita por el grupo.
+% xltabular: la tabla puede partirse entre páginas y repite el encabezado.
+{\small\renewcommand{\arraystretch}{1.2}
+\begin{xltabular}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{1.5cm}X>{\raggedright\arraybackslash}p{5.0cm}@{}}
+  \caption{Herramientas de inteligencia artificial usadas como apoyo}\label{tab:declaracion-ia}\\
+  \toprule
+  \textbf{Herramienta} & \textbf{Versión} & \textbf{Para qué se usó} & \textbf{Cómo se verificó}\\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{Herramienta} & \textbf{Versión} & \textbf{Para qué se usó} & \textbf{Cómo se verificó}\\
+  \midrule
+  \endhead
+  \bottomrule
+  \endlastfoot
+  Claude (Anthropic), en Claude Code & Opus 5.5 &
+  Plantilla de las diapositivas (tema visual en Beamer) y de estas notas, estructura de carpetas,
+  y propuesta de reparto de partes y tiempos. No redactó el contenido de las diapositivas ni del
+  guion, ni buscó referencias. &
+  \pend{Grupo}{cómo revisaron la plantilla y el reparto}\\
+  \pend{Grupo}{} & & & \\
+\end{xltabular}}
 
 \printbibliography[heading=bibintoc, title={Referencias}]
 
