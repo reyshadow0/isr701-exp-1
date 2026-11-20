@@ -73,4 +73,4 @@ en el esquema completo (`scheme-full`).
 
 ## Ejemplo sencillo
 
-_Pendiente (César): qué hace el ejemplo, qué se necesita para ejecutarlo y cómo se ejecuta._
+El ejemplo UDP se encuentra en `ejemplo/udp_demo.py`. Las instrucciones de ejecución están en `ejemplo/README.md`.
