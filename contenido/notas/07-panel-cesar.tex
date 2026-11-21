@@ -1,12 +1,5 @@
-% ---------------------------------------------------------------------
-% Parte 7 · Panel de César · César · 1:30 (lo edita solo César)
-% Escribe lo que vas a decir, en tus palabras y en 4 a 6 líneas: es tu
-% guion, no una copia de las diapositivas. Cita cada dato (\cite[p.~X]{clave}).
-% Preguntas guía (bórralas cuando termines):
-%   - ¿Qué proyecto es y quién usa el panel?
-%   - ¿Qué evento viaja por el WebSocket, quién lo envía y quién lo recibe?
-%   - ¿Por qué WebSocket y no polling (o UDP) en tu caso?
-%   - ¿Qué pasa si se cae la conexión y cómo se recupera?
-%   - ¿Qué cambiarías si lo hicieras de nuevo?
-% ---------------------------------------------------------------------
-\pendiente{César}{guion de esta parte (4 a 6 líneas) con las citas de cada dato.}
+En mi caso muestro el panel de monitoreo en tiempo real de SGIRI, pensado para que un operador supervise el estado de la red desde una sola pantalla.
+Como se ve en la captura, el panel concentra cuatro métricas principales: latencia promedio, paquetes UDP con su porcentaje de pérdida, conexiones TCP activas y el estado general del servicio.
+Debajo se actualiza cada segundo una gráfica de latencia junto con una tabla de eventos recientes que identifica el nodo, el protocolo y si hubo pérdida.
+Aquí el WebSocket cumple el papel central: el servidor empuja las mediciones y alertas apenas ocurren, y el navegador las dibuja al vuelo sin tener que hacer peticiones HTTP repetitivas.
+Si la conexión se cae, el indicador de estado avisa al operador, los eventos registran la pérdida y el cliente intenta reconectarse automáticamente para retomar la lectura apenas vuelve el enlace.
