@@ -19,9 +19,10 @@
   \endhead
   \bottomrule
   \endlastfoot
-  \pend{Grupo}{} & & \\
-  \pend{Grupo}{} & & \\
-  \pend{Grupo}{} & & \\
+  ¿Por qué en \texttt{udp\_demo.py} se usa \texttt{time.sleep(0.3)} en el cliente si UDP no requiere conexión? & César & Solo para darle tiempo al hilo del servidor a ejecutar \texttt{bind()} en el puerto 5002 antes de que el cliente envíe el primer datagrama dentro del mismo script.\\
+  ¿Por qué el panel de SGIRI usa WebSockets para la gráfica en vivo en lugar de peticiones HTTP cada segundo? & César & Porque el canal queda abierto y el servidor empuja las métricas apenas ocurren, evitando la sobrecarga de abrir cabeceras y conexiones HTTP repetitivas.\\
+  Si UDP es más ligero al evitar el handshake y las retransmisiones, ¿por qué no se usa para todo el sistema? & César & Porque UDP no garantiza entrega ni orden; en módulos críticos como autenticación, APIs o bases de datos se requiere la confiabilidad de TCP.\\
+  \pend{Erwin / Mario}{} & & \\
 \end{xltabular}}
 
 \noindent\textbf{Pregunta crítica para otro equipo:} \pend{Grupo}{a qué equipo y qué le van a preguntar}
