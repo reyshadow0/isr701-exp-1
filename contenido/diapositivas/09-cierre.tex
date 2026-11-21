@@ -7,23 +7,23 @@
   \begin{columns}[T]
     \begin{column}{0.31\textwidth}
       \begin{tarjeta}[equal height group=lecciones]{bcmTCP}{1}
-        \small\pend{César}{lección concreta}
+        \small Usar \textbf{TCP} cuando los datos no pueden perderse ni llegar en desorden, como en APIs, bases de datos y transacciones.
       \end{tarjeta}
     \end{column}
     \begin{column}{0.31\textwidth}
       \begin{tarjeta}[equal height group=lecciones]{bcmUDP}{2}
-        \small\pend{César}{lección concreta}
+        \small Elegir \textbf{UDP} si conviene evitar el handshake y las retransmisiones, asumiendo que la app tolera pérdidas o las maneja aparte.
       \end{tarjeta}
     \end{column}
     \begin{column}{0.31\textwidth}
       \begin{tarjeta}[equal height group=lecciones]{bcmWS}{3}
-        \small\pend{César}{lección concreta}
+        \small Aplicar \textbf{WebSockets} en paneles en vivo o chats donde el servidor debe enviar datos continuos sin abrir nuevas peticiones.
       \end{tarjeta}
     \end{column}
   \end{columns}
   \vfill
   \begin{center}
-    {\large\bfseries\pend{César}{frase de cierre}\par}
+    {\large\bfseries En un sistema distribuido real los protocolos no compiten: se combinan según lo que necesita cada módulo.\par}
   \end{center}
   \vfill
 \end{frame}
