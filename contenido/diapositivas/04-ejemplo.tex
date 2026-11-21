@@ -16,26 +16,26 @@
       \node[anchor=north, text width=3.8cm, align=center, font=\small] at (0,-0.65)
         {El servidor abre un socket \texttt{UDP} en el puerto \texttt{5002} y espera con \texttt{recvfrom()}};
       \node[anchor=north, text width=3.8cm, align=center, font=\small] at (4.6,-0.65)
-        {El cliente envía un datagrama directo con \texttt{sendto()} sin establecer conexión};
+        {El cliente envía un datagrama directo con \texttt{sendto()}, sin establecer conexión previa};
       \node[anchor=north, text width=3.8cm, align=center, font=\small] at (9.2,-0.65)
-        {El servidor lee el mensaje y responde al instante a la dirección de origen};
+        {El servidor lee el datagrama y devuelve una respuesta a la dirección de origen};
     \end{tikzpicture}
   \end{center}
   \vfill
-  {\small\color{bcmGris}Hecho en Python 3 (librerías estándar \texttt{socket} y \texttt{threading}) · Código e instrucciones en \texttt{ejemplo/udp\_demo.py} y \texttt{ejemplo/README.md}.\par}
+  {\small\color{bcmGris}Hecho en Python 3 (\texttt{socket} y \texttt{threading}) · Código e instrucciones en \texttt{ejemplo/udp\_demo.py} y \texttt{ejemplo/README.md}.\par}
 \end{frame}
 
 \begin{frame}{El código que importa}
   \begin{columns}[T]
     \begin{column}{0.58\textwidth}
-      \lstinputlisting[language=Python, firstline=7, lastline=18]{ejemplo/udp_demo.py}
+      \lstinputlisting[language=Python, firstline=7, lastline=18, basicstyle=\ttfamily\tiny]{ejemplo/udp_demo.py}
     \end{column}
     \begin{column}{0.38\textwidth}
       \begin{tarjeta}{bcmWS}{Fíjense en}
         \small
         \begin{itemize}
           \item \textbf{\texttt{SOCK\_DGRAM}:} crea un socket sin conexión; no usa \texttt{listen()}, \texttt{accept()} ni \texttt{connect()}.
-          \item \textbf{\texttt{sendto()} y \texttt{recvfrom()}:} envían y reciben datagramas directos con mínima latencia, sin garantizar entrega.
+          \item \textbf{\texttt{sendto()} y \texttt{recvfrom()}:} se ahorran el handshake y las retransmisiones, pero no garantizan entrega ni rapidez.
         \end{itemize}
       \end{tarjeta}
     \end{column}
