@@ -5,21 +5,24 @@
 % Las tres tarjetas tienen la misma estructura en los tres paneles para
 % que la comparación de la parte 8 salga sola.
 % ---------------------------------------------------------------------
-\begin{frame}{Panel de Mario}{\pend{Mario}{qué proyecto es y para quién es el panel, en una línea}}
+\begin{frame}{Panel de Mario}{Pre-sustentaciones: la coordinación sigue las solicitudes sin recargar}
   \begin{columns}[T]
     \begin{column}{0.56\textwidth}
-      \figura{figuras/panel-mario.png}{\linewidth}{3.7cm}{Captura del panel funcionando, con la fecha
+      \figura{figuras/panel-mario.png}{\linewidth}{3.3cm}{Captura del panel funcionando, con la fecha
         visible (evidencia de primera mano).}
       \begin{tarjeta}{bcmAcento}{Si se cae la conexión}
-        \footnotesize\pend{Mario}{qué ve el usuario y cómo se recupera}
+        \footnotesize Aviso en ámbar y reintento a 1, 2, 4, 8 s, luego cada 10\par
+        Al volver, recarga todas las solicitudes
       \end{tarjeta}
     \end{column}
     \begin{column}{0.4\textwidth}
       \begin{tarjeta}{bcmTinta}{Qué hace}
-        \footnotesize\pend{Mario}{qué muestra o controla el panel}
+        \footnotesize Muestra cada solicitud con su estado\par
+        y la lista de eventos recibidos
       \end{tarjeta}
       \begin{tarjeta}{bcmWS}{Dónde entra el WebSocket}
-        \footnotesize\pend{Mario}{qué evento viaja, quién lo envía y quién lo recibe}
+        \footnotesize El director cambia un estado\par
+        y el panel se entera sin preguntar
       \end{tarjeta}
     \end{column}
   \end{columns}
