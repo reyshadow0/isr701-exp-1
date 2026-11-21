@@ -8,24 +8,24 @@
     \begin{column}{0.47\textwidth}
       \begin{tarjeta}[equal height group=tcpudp]{bcmTCP}{TCP}
         \begin{itemize}
-          \item \pend{Erwin}{qué garantiza}
-          \item \pend{Erwin}{cuánto cuesta esa garantía}
-          \item \pend{Erwin}{una aplicación que lo usa}
+          \item Conexión previa y entrega en orden
+          \item Costo: handshake, ACK, más latencia
+          \item Ej.: navegador, SGA, correo
         \end{itemize}
       \end{tarjeta}
     \end{column}
     \begin{column}{0.47\textwidth}
       \begin{tarjeta}[equal height group=tcpudp]{bcmUDP}{UDP}
         \begin{itemize}
-          \item \pend{Erwin}{qué no garantiza}
-          \item \pend{Erwin}{qué gana a cambio}
-          \item \pend{Erwin}{una aplicación que lo usa}
+          \item Sin conexión ni reenvío
+          \item Gana: menos espera, cabecera de 8 bytes
+          \item Ej.: Meet, juegos en línea, DNS
         \end{itemize}
       \end{tarjeta}
     \end{column}
   \end{columns}
   \vspace{0.35cm}
-  {\small\color{bcmGris}\pend{Erwin}{cita de la fuente de esta comparación, con página}\par}
+  {\small\color{bcmGris}Fuente: \cite[pp.~7--8]{barghash2022}\par}
 \end{frame}
 
 \begin{frame}{Cómo se ve en la red}
@@ -38,7 +38,11 @@
     \begin{column}{0.34\textwidth}
       \begin{tarjeta}{bcmTinta}{Qué mirar}
         \small
-        \pend{Erwin}{las dos o tres cosas del diagrama que vas a señalar}
+        \begin{itemize}
+          \item TCP: 3 mensajes antes del primer dato
+          \item TCP: cada envío espera su ACK
+          \item UDP: se pierde uno y nadie lo reenvía
+        \end{itemize}
       \end{tarjeta}
     \end{column}
   \end{columns}
