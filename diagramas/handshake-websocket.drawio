@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="ws-handshake" name="Handshake WebSocket">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cli" value="Cliente (navegador)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="20" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="srv" value="Servidor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="520" y="20" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lc" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="70" as="sourcePoint" />
+            <mxPoint x="160" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ls" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="70" as="sourcePoint" />
+            <mxPoint x="600" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t1" value="1. HTTP: GET con Upgrade: websocket" style="text;html=1;align=center;verticalAlign=bottom;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="170" y="95" width="420" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" style="endArrow=classic;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="125" as="sourcePoint" />
+            <mxPoint x="600" y="125" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t2" value="2. HTTP: 101 Switching Protocols" style="text;html=1;align=center;verticalAlign=bottom;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="170" y="160" width="420" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" style="endArrow=classic;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="190" as="sourcePoint" />
+            <mxPoint x="160" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="band" value="Conexión abierta: los dos lados envían cuando quieren" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="160" y="220" width="440" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" value="3. WebSocket: trama del cliente" style="text;html=1;align=center;verticalAlign=bottom;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="170" y="280" width="420" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="310" as="sourcePoint" />
+            <mxPoint x="600" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t4" value="4. WebSocket: trama del servidor, sin que el cliente pregunte" style="text;html=1;align=center;verticalAlign=bottom;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="170" y="345" width="420" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="375" as="sourcePoint" />
+            <mxPoint x="160" y="375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t5" value="5. WebSocket: el navegador cierra la conexión al salir de la página" style="text;html=1;align=center;verticalAlign=bottom;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="170" y="430" width="420" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="460" as="sourcePoint" />
+            <mxPoint x="600" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note" value="Cada trama WebSocket lleva de 2 a 14 bytes de cabecera." style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="160" y="490" width="440" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="src" value="Fuente: Murley et al. (2021), secc. 2.4." style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="80" y="575" width="600" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

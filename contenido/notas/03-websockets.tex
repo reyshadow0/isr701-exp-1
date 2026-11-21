@@ -2,11 +2,15 @@
 % Parte 3 · WebSockets · Mario · 2:00 (lo edita solo Mario)
 % Escribe lo que vas a decir, en tus palabras y en 4 a 6 líneas: es tu
 % guion, no una copia de las diapositivas. Cita cada dato (\cite[p.~X]{clave}).
-% Preguntas guía (bórralas cuando termines):
-%   - ¿Por qué el esquema petición-respuesta de HTTP no basta para el tiempo real?
-%   - ¿Cómo empieza una conexión WebSocket y sobre qué protocolo de transporte va?
-%   - ¿Qué cambia frente a polling y long polling, y cuánto cuesta cada uno?
-%   - ¿Qué dato medido (artículo con DOI, página) usas y qué significa?
-%   - ¿Con qué frase le pasas la palabra a César?
 % ---------------------------------------------------------------------
-\pendiente{Mario}{guion de esta parte (4 a 6 líneas) con las citas de cada dato.}
+WebSocket se estandarizó en 2011. La idea es abrir una conexión entre el navegador y el servidor y no
+cerrarla. Arranca con una petición HTTP que pide cambiar de protocolo, y si el servidor acepta, contesta
+con un 101 \cite[secc.~2.4]{Murley2021}.
+
+Con polling el navegador pregunta a cada rato. Según Murley y su equipo, cada ida y vuelta gasta cerca de
+590 bytes solo en cabeceras \cite[p.~1197]{Murley2021}. Long polling reduce las preguntas, pero cada
+mensaje sigue pagando ese costo.
+
+En WebSocket cada mensaje lleva entre 2 y 14 bytes de cabecera \cite[secc.~2.4]{Murley2021}. En
+tradingview una actualización pesa 82 bytes, y los autores calculan que con long polling serían unos 499
+\cite[p.~1197]{Murley2021}.

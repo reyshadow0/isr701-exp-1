@@ -3,61 +3,83 @@
 % Tres diapositivas: el diagrama, la comparación y un dato con cita.
 % ---------------------------------------------------------------------
 \begin{frame}{Del HTTP al WebSocket}
-  \begin{columns}[c]
-    \begin{column}{0.62\textwidth}
-      \figura{figuras/websocket-handshake.pdf}{\linewidth}{5.4cm}{Diagrama de secuencia propio en
-        draw.io (fuente en \texttt{diagramas/}): cliente y servidor, petición de cambio de protocolo,
-        respuesta y mensajes en los dos sentidos.}
-    \end{column}
-    \begin{column}{0.34\textwidth}
+  \centering
+  \figura{figuras/handshake-websocket.pdf}{\textwidth}{6.0cm}{Diagrama de secuencia propio en
+    draw.io (fuente en \texttt{diagramas/}): cliente y servidor, petición de cambio de protocolo,
+    respuesta y mensajes en los dos sentidos.}
+\end{frame}
+
+\begin{frame}{Qué es WebSocket}
+  \begin{columns}[T]
+    \begin{column}{0.4\textwidth}
       \begin{tarjeta}{bcmWS}{En una frase}
-        \small\pend{Mario}{qué es un WebSocket, en tus palabras}
+        \small Es un protocolo estandarizado en 2011. Desde 2013 lo soportan todos los navegadores
+        principales, de escritorio y móviles.
       \end{tarjeta}
+    \end{column}
+    \begin{column}{0.56\textwidth}
       \begin{tarjeta}{bcmTinta}{Qué mirar}
-        \small\pend{Mario}{lo que vas a señalar en el diagrama}
+        \small
+        \begin{itemize}
+          \item El cliente hace un GET normal y pide pasar a WebSocket con la cabecera
+            \texttt{Upgrade: websocket}.
+          \item Si el servidor acepta, responde con el código 101 y la conexión queda abierta.
+          \item Desde ese momento los dos lados mandan mensajes cuando quieren. El servidor ya no espera
+            a que le pregunten.
+        \end{itemize}
       \end{tarjeta}
     \end{column}
   \end{columns}
+  \vfill
+  {\scriptsize\color{bcmGris}\cite[secc.~2.4]{Murley2021}\par}
 \end{frame}
 
-% Las tres columnas son una sugerencia: cámbienlas si comparan otras
-% alternativas (por ejemplo, Server-Sent Events).
 \begin{frame}{¿Cómo se entera el cliente de un cambio?}
   \begin{columns}[T]
     \begin{column}{0.31\textwidth}
       \begin{tarjeta}[equal height group=alternativas]{bcmGris}{Polling}
         \small
-        \pend{Mario}{cómo funciona, en una línea}\par\medskip
-        \pend{Mario}{su costo}
+        Pregunta cada cierto tiempo\par\medskip
+        Cabeceras HTTP en cada pregunta
       \end{tarjeta}
     \end{column}
     \begin{column}{0.31\textwidth}
       \begin{tarjeta}[equal height group=alternativas]{bcmGris}{Long polling}
         \small
-        \pend{Mario}{cómo funciona, en una línea}\par\medskip
-        \pend{Mario}{su costo}
+        El servidor espera a tener el dato\par\medskip
+        Cabeceras HTTP en cada mensaje
       \end{tarjeta}
     \end{column}
     \begin{column}{0.31\textwidth}
       \begin{tarjeta}[equal height group=alternativas]{bcmWS}{WebSocket}
         \small
-        \pend{Mario}{cómo funciona, en una línea}\par\medskip
-        \pend{Mario}{su costo}
+        Una conexión que queda abierta\par\medskip
+        2 a 14\,B por mensaje
       \end{tarjeta}
     \end{column}
   \end{columns}
+  \vfill
+  {\scriptsize\color{bcmGris}Mitrović et al.\ (2023) también compararon WebSocket con long polling, en
+    este caso en un sistema IoT con ESP32 sobre Wi-Fi \cite[p.~267]{Mitrovic2023}.
+    Fuentes: \cite[secc.~2.2 y 2.4]{Murley2021}.\par}
 \end{frame}
 
 \begin{frame}{Un dato}
   \begin{columns}[c]
     \begin{column}{0.45\textwidth}
       \centering
-      {\color{bcmWS}\fontsize{40}{44}\selectfont\bfseries\pend{Mario}{cifra}\par}
+      {\color{bcmWS}\fontsize{40}{44}\selectfont\bfseries184,9\,B\par}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \pend{Mario}{qué se midió, dónde y frente a qué; un resultado concreto del estudio, no una idea
-        del resumen}\par\medskip
-      {\small\color{bcmGris}\pend{Mario}{cita con página de un artículo indexado con DOI}\par}
+      \small
+      \begin{itemize}
+        \item Murley y su equipo midieron el tamaño medio de las cabeceras HTTP en los sitios que
+          analizaron. Les dio 184,9\,B en las peticiones y 403,1\,B en las respuestas.
+        \item En tradingview.com, que actualiza tasas de cambio por WebSocket más o menos cada segundo,
+          cada actualización pesa 82\,B en promedio.
+        \item Si ese sitio usara long polling, los autores calculan unos 499\,B por actualización.
+      \end{itemize}
+      {\small\color{bcmGris}\cite[secc.~3.3.4, p.~1197]{Murley2021}\par}
     \end{column}
   \end{columns}
 \end{frame}
