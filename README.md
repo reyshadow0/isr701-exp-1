@@ -6,7 +6,6 @@ Aplicaciones Distribuidas (ISR-701) · Universidad Técnica Estatal de Quevedo �
 
 **Exposición:** lunes 23 de noviembre de 2026
 
-**Video del ensayo completo:** _pendiente: enlace al video (máximo 12 minutos, con el rostro y la voz de los tres)_
 
 ## Contenido del repositorio
 
