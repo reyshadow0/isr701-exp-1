@@ -5,17 +5,17 @@
 % ---------------------------------------------------------------------
 \begin{frame}{Los tres paneles, lado a lado}
   \footnotesize
-  \renewcommand{\arraystretch}{1.35}
+  \renewcommand{\arraystretch}{1.1}
   \begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.3cm}XXX@{}}
     \toprule
     & \nombreCorto{erwin} & \nombreCorto{mario} & \nombreCorto{cesar}\\
     \midrule
-    Evento en tiempo real & \pend{Erwin}{} & Cambio de estado de una solicitud (\texttt{SOLICITUD\_\allowbreak ACTUALIZADA}) & \pend{César}{}\\
-    Servidor o librería   & \pend{Erwin}{} & Spring Boot (\texttt{TextWebSocket\allowbreak Handler}) y el WebSocket del navegador & \pend{César}{}\\
-    Si se cae la conexión & \pend{Erwin}{} & Reintenta y, al volver, recarga todas las solicitudes & \pend{César}{}\\
+    Evento en tiempo real & \pend{Erwin}{} & Cambio de estado de una solicitud (\texttt{SOLICITUD\_\allowbreak ACTUALIZADA}) & Latencia y estado de nodos cada segundo (gráfica y tabla).\\
+    Servidor o librería   & \pend{Erwin}{} & Spring Boot (\texttt{TextWebSocket\allowbreak Handler}) y el WebSocket del navegador & Spring Boot (SGIRI) y WebSocket nativo en navegador.\\
+    Si se cae la conexión & \pend{Erwin}{} & Reintenta y, al volver, recarga todas las solicitudes & El indicador avisa, marca pérdida y reconecta automáticamente.\\
     \bottomrule
   \end{tabularx}
-  \vspace{0.45cm}
+  \vspace{0.3cm}
 
   \normalsize
   \pend{Erwin}{lo que se ve al compararlos, en una línea}
