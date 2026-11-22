@@ -23,7 +23,7 @@
   ¿Por qué el panel de SGIRI usa WebSockets para la gráfica en vivo en lugar de peticiones HTTP cada segundo? & César & Porque el canal queda abierto y el servidor empuja las métricas apenas ocurren, evitando la sobrecarga de abrir cabeceras y conexiones HTTP repetitivas.\\
   Si UDP es más ligero al evitar el handshake y las retransmisiones, ¿por qué no se usa para todo el sistema? & César & Porque UDP no garantiza entrega ni orden; en módulos críticos como autenticación, APIs o bases de datos se requiere la confiabilidad de TCP.\\
   Si el polling se sigue usando más que WebSocket, ¿por qué el panel de pre-sustentaciones usa WebSocket? & Mario & Porque con polling el navegador tiene que preguntar a cada rato y cada respuesta lleva cabeceras HTTP completas (en promedio 403,1\,B). Por WebSocket una actualización en tradingview.com pesó 82\,B, y con long polling los autores estiman unos 499\,B \cite[p.~1197]{Murley2021}. Además, el cambio de estado llega sin que el panel lo pida.\\
-  \pend{Erwin}{} & & \\
+  ¿Por qué el panel de titulación manda el aviso después de guardar en la base y no apenas el director hace clic? & Erwin & Si saliera antes, el estudiante recargaría el documento y todavía no vería la observación. Y si la operación falla y se deshace, no le llega un aviso falso.\\
 \end{xltabular}}
 
 \noindent\textbf{Pregunta crítica para otro equipo:} \pend{Grupo}{a qué equipo y qué le van a preguntar}
