@@ -10,13 +10,13 @@
     \toprule
     & \nombreCorto{erwin} & \nombreCorto{mario} & \nombreCorto{cesar}\\
     \midrule
-    Evento en tiempo real & \pend{Erwin}{} & Cambio de estado de una solicitud (\texttt{SOLICITUD\_\allowbreak ACTUALIZADA}) & Latencia y estado de nodos cada segundo (gráfica y tabla).\\
-    Servidor o librería   & \pend{Erwin}{} & Spring Boot (\texttt{TextWebSocket\allowbreak Handler}) y el WebSocket del navegador & Spring Boot (SGIRI) y WebSocket nativo en navegador.\\
-    Si se cae la conexión & \pend{Erwin}{} & Reintenta y, al volver, recarga todas las solicitudes & El indicador avisa, marca pérdida y reconecta automáticamente.\\
+    Evento en tiempo real & El director observa, devuelve o aprueba el documento & Cambio de estado de una solicitud (\texttt{SOLICITUD\_\allowbreak ACTUALIZADA}) & Latencia y estado de nodos cada segundo (gráfica y tabla).\\
+    Servidor o librería   & Spring Boot con STOMP y \texttt{@stomp/\allowbreak stompjs} en Angular & Spring Boot (\texttt{TextWebSocket\allowbreak Handler}) y el WebSocket del navegador & Spring Boot (SGIRI) y WebSocket nativo en navegador.\\
+    Si se cae la conexión & Reintenta cada 5\,s y al volver recarga el documento & Reintenta y, al volver, recarga todas las solicitudes & El indicador avisa, marca pérdida y reconecta automáticamente.\\
     \bottomrule
   \end{tabularx}
   \vspace{0.3cm}
 
   \normalsize
-  \pend{Erwin}{lo que se ve al compararlos, en una línea}
+  En los tres el servidor avisa sin que el cliente pregunte. Lo que cambia es el ritmo: Mario y yo mandamos un aviso cuando pasa algo, y César manda datos cada segundo.
 \end{frame}
