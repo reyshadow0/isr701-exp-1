@@ -1,9 +1,7 @@
 % ---------------------------------------------------------------------
 % Parte 8 · Comparación de paneles · Erwin · 0:30 (lo edita solo Erwin)
-% Escribe lo que vas a decir, en tus palabras y en 4 a 6 líneas: es tu
-% guion, no una copia de las diapositivas. Cita cada dato (\cite[p.~X]{clave}).
-% Preguntas guía (bórralas cuando termines):
-%   - ¿En qué se parecen y en qué se diferencian los tres paneles?
-%   - ¿Qué conclusión sale de ponerlos lado a lado?
 % ---------------------------------------------------------------------
-\pendiente{Erwin}{guion de esta parte (4 a 6 líneas) con las citas de cada dato.}
+Si ponemos los tres paneles lado a lado, todos tienen Spring Boot en el servidor y WebSocket en el navegador, y en ninguno el cliente tiene que estar preguntando si hay algo nuevo.
+Donde se diferencian es en cuándo sale el mensaje. En el de Mario y en el mío sale solo cuando cambia una solicitud o un documento; en el de César sale cada segundo, porque muestra la latencia de los nodos.
+En la caída hacen lo mismo: reintentan y, cuando vuelve la conexión, piden otra vez los datos para no quedarse con información vieja.
+Con eso le paso la palabra a César para el cierre.
