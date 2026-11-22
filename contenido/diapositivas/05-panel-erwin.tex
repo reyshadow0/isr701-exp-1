@@ -11,15 +11,18 @@
       \figura{figuras/panel-erwin.png}{\linewidth}{3.7cm}{Captura del panel funcionando, con la fecha
         visible (evidencia de primera mano).}
       \begin{tarjeta}{bcmAcento}{Si se cae la conexión}
-        \footnotesize El indicador se pone rojo o ámbar y sale «Sin conexión, reintentando...». Reintenta cada 5\,s y, cuando vuelve, recarga el documento.
+        \footnotesize Indicador en ámbar y reintento cada 5\,s\par
+        Al volver, recarga el documento
       \end{tarjeta}
     \end{column}
     \begin{column}{0.4\textwidth}
       \begin{tarjeta}{bcmTinta}{Qué hace}
-        \footnotesize Le avisa al estudiante cuando su director observa, devuelve o aprueba el documento. No hace falta recargar la página.
+        \footnotesize Avisa al estudiante cuando el director\par
+        observa, devuelve o aprueba
       \end{tarjeta}
       \begin{tarjeta}{bcmWS}{Dónde entra el WebSocket}
-        \footnotesize Spring Boot manda un JSON por STOMP después de guardar el cambio. Solo lo recibe el estudiante dueño del documento, que se conectó con su JWT.
+        \footnotesize El backend guarda y envía el aviso\par
+        solo al estudiante dueño, sin recargar
       \end{tarjeta}
     \end{column}
   \end{columns}
