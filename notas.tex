@@ -124,7 +124,7 @@ preguntas cualquiera de los tres responde sobre cualquier parte.
   \bottomrule
   \endlastfoot
   \nombreCompleto{erwin} & \pend{Erwin}{} & \pend{Erwin}{}\\
-  \nombreCompleto{mario} & \pend{Mario}{} & \pend{Mario}{}\\
+  \nombreCompleto{mario} & Partes 1 (apertura), 3 (WebSockets: 4 diapositivas y el diagrama \texttt{diagramas/handshake-websocket.drawio}) y 6 (panel de pre-sustentaciones en \texttt{figuras/panel-mario.png}); evidencia de lectura (\texttt{evidencias/articulo-2.png}). & \cite{Murley2021}, \cite{Mitrovic2023}\\
   \nombreCompleto{cesar} & Partes 4 (ejemplo UDP en \texttt{ejemplo/udp\_demo.py} y \texttt{README.md}), 7 (panel de SGIRI en \texttt{figuras/panel-cesar.png}) y 9 (lecciones y cierre); diapositivas y guiones respectivos; entradas en \texttt{BITACORA.md} y evidencia de lectura (\texttt{evidencias/articulo-3.png}). & \pend{César}{poner aquí tus 2 \texttt{\textbackslash cite\{\}} cuando estén en \texttt{referencias.bib}}\\
 \end{xltabular}}
 
@@ -150,38 +150,19 @@ preguntas cualquiera de los tres responde sobre cualquier parte.
   Plantilla de las diapositivas (tema visual en Beamer) y de estas notas, estructura de carpetas,
   y propuesta de reparto de partes y tiempos. No redactó el contenido de las diapositivas ni del
   guion, ni buscó referencias. &
-  \pend{Grupo}{cómo revisaron la plantilla y el reparto}\\
+  Compilamos la plantilla y ajustamos los tiempos del reparto en una reunión del 18/11.\\
   GitHub Copilot & VS Code &
-  (César) Ejecución local en Python 3 para comprobar el envío y recepción de datagramas; corrección manual del código y redacción propia de diapositivas y guion.\\
- 
+  (César) \pend{César}{para qué usó Copilot} &
+  Ejecución local en Python 3 para comprobar el envío y recepción de datagramas; corrección manual del código y redacción propia de diapositivas y guion.\\
+  Claude (Anthropic), en claude.ai & Opus 5.5 &
+  (Mario) Búsqueda de los artículos de sus partes (Murley 2021 y Mitrović 2023).
+  El 21/11: corrección de la página del 6,3\,\%, limpieza de la tabla de IA
+  duplicada, pies del anexo de capturas e idea de respuesta de su pregunta en \texttt{preguntas.tex}. &
+  Mario comparó cada cifra y cada página con el PDF de Murley y corrigió las que no coincidían. De
+  Mitrović solo se usa lo que dice su resumen. Las tarjetas del panel salen de su captura y de cómo
+  funciona su propio código. Los cambios del 21/11 los revisó con \texttt{git diff} antes del commit.\\
 \end{xltabular}}
 
-%\section{Declaración de uso de inteligencia artificial}
-
-% Una fila por cada uso real, de cada integrante, escrita por el grupo.
-% xltabular: la tabla puede partirse entre páginas y repite el encabezado.
-{\small\renewcommand{\arraystretch}{1.2}
-\begin{xltabular}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{1.5cm}X>{\raggedright\arraybackslash}p{5.0cm}@{}}
-  \caption{Herramientas de inteligencia artificial usadas como apoyo}\label{tab:declaracion-ia}\\
-  \toprule
-  \textbf{Herramienta} & \textbf{Versión} & \textbf{Para qué se usó} & \textbf{Cómo se verificó}\\
-  \midrule
-  \endfirsthead
-  \toprule
-  \textbf{Herramienta} & \textbf{Versión} & \textbf{Para qué se usó} & \textbf{Cómo se verificó}\\
-  \midrule
-  \endhead
-  \bottomrule
-  \endlastfoot
-  Claude (Anthropic), en Claude Code & Opus 5.5 &
-  Plantilla de las diapositivas (tema visual en Beamer) y de estas notas, estructura de carpetas,
-  y propuesta de reparto de partes y tiempos. No redactó el contenido de las diapositivas ni del
-  guion, ni buscó referencias. &
-  \pend{Grupo}{cómo revisaron la plantilla y el reparto}\\
-  GitHub Copilot & VS Code &
-  (César) Ejecución local en Python 3 para comprobar el envío y recepción de datagramas; corrección manual del código y redacción propia de diapositivas y guion.\\
-  
-  \end{xltabular}}
 \printbibliography[heading=bibintoc, title={Referencias}]
 
 % ---------------- Anexos ----------------
@@ -210,7 +191,11 @@ preguntas cualquiera de los tres responde sobre cualquier parte.
     o anotado, con la página.}\hfill
   \figura{evidencias/articulo-3.png}{0.31\textwidth}{6cm}{Captura de un artículo citado, subrayado
     o anotado, con la página.}
-  \caption{Artículos citados, anotados por el grupo: \pend{Grupo}{referencia y página de cada captura}}
+  % Erwin: cuando agregues barghash2022 con scripts\doi2bib.ps1 (DOI probable
+  % 10.3390/computers11090132), cambia el texto de la izquierda por \cite[p.~7]{barghash2022}.
+  \caption{Artículos citados, anotados por el grupo. Izquierda: Barghash, Hammad y Gharaibeh,
+    \emph{Computers}, 2022, secc.~3.1.1, p.~7 de 19 (Erwin). Centro: \cite[secc.~3.3.4, p.~1197]{Murley2021}
+    (Mario). Derecha: \pend{César}{referencia y página de \texttt{articulo-3.png}}}
   \label{fig:articulos}
 \end{figure}
 
