@@ -1,12 +1,9 @@
 % ---------------------------------------------------------------------
 % Parte 5 · Panel de Erwin · Erwin · 1:30 (lo edita solo Erwin)
-% Escribe lo que vas a decir, en tus palabras y en 4 a 6 líneas: es tu
-% guion, no una copia de las diapositivas. Cita cada dato (\cite[p.~X]{clave}).
-% Preguntas guía (bórralas cuando termines):
-%   - ¿Qué proyecto es y quién usa el panel?
-%   - ¿Qué evento viaja por el WebSocket, quién lo envía y quién lo recibe?
-%   - ¿Por qué WebSocket y no polling (o UDP) en tu caso?
-%   - ¿Qué pasa si se cae la conexión y cómo se recupera?
-%   - ¿Qué cambiarías si lo hicieras de nuevo?
 % ---------------------------------------------------------------------
-\pendiente{Erwin}{guion de esta parte (4 a 6 líneas) con las citas de cada dato.}
+Mi panel está en la app de gestión de documentos de titulación, que es Spring Boot con Angular, y lo usa el estudiante mientras su director revisa el documento.
+Cuando el director agrega una observación, lo devuelve o lo aprueba, el backend primero guarda el cambio y después manda un mensaje por WebSocket con lo que pasó y la hora.
+Ese mensaje va a un canal que es solo de ese estudiante. Para conectarse necesita su token, y si intenta escuchar el canal de otro el servidor lo rechaza.
+Antes había que recargar la página para enterarse. Ahora el aviso llega apenas pasa algo. Łasocha y Badurowicz compararon WebSocket con HTTP y midieron cuánto tarda cada uno en enviar datos \cite{lasocha2021}.
+Si se cae la conexión, el indicador cambia de color y el cliente reintenta cada 5 segundos; al volver recarga el documento para no perder nada.
+Si lo hiciera otra vez, guardaría los avisos en la base, así el estudiante vería también los que llegaron mientras estaba desconectado.
