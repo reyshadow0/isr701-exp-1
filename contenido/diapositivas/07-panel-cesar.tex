@@ -5,20 +5,20 @@
 % Las tres tarjetas tienen la misma estructura en los tres paneles para
 % que la comparación de la parte 8 salga sola.
 % ---------------------------------------------------------------------
-\begin{frame}{Panel de César}{SGIRI: panel de monitoreo de red en tiempo real para operadores y administradores}
+\begin{frame}{Panel de César}{SGIRI: panel de monitoreo de red en tiempo real para operadores}
   \begin{columns}[T]
     \begin{column}{0.56\textwidth}
-      \figura{figuras/panel-cesar.png}{\linewidth}{3.7cm}{Panel de monitoreo de SGIRI con fecha visible (21/11/2026).}
+      \figura{figuras/panel-cesar.png}{\linewidth}{2.9cm}{Panel de SGIRI con fecha visible (21/11/2026).}
       \begin{tarjeta}{bcmAcento}{Si se cae la conexión}
-        \footnotesize El indicador superior cambia de estado, la tabla marca eventos de pérdida y la gráfica se detiene hasta que el cliente reconecta automáticamente y reanuda el flujo.
+        \footnotesize El indicador superior avisa, la tabla marca pérdida y el cliente reconecta automáticamente para retomar el flujo.
       \end{tarjeta}
     \end{column}
     \begin{column}{0.4\textwidth}
       \begin{tarjeta}{bcmTinta}{Qué hace}
-        \footnotesize Muestra en una sola vista la latencia promedio en vivo, paquetes UDP enviados y perdidos, conexiones TCP activas, el estado del servicio y la tabla de eventos recientes.
+        \footnotesize Muestra latencia en vivo, paquetes UDP enviados/perdidos, conexiones TCP activas, estado del servicio y eventos recientes.
       \end{tarjeta}
       \begin{tarjeta}{bcmWS}{Dónde entra el WebSocket}
-        \footnotesize El servidor envía eventos de latencia y estado de nodos cada segundo por el canal abierto; el navegador los recibe y actualiza la gráfica y la tabla sin recargar.
+        \footnotesize El servidor envía latencia y estado de nodos cada segundo por el canal abierto; el navegador actualiza gráfica y tabla sin recargar.
       \end{tarjeta}
     \end{column}
   \end{columns}
